@@ -1,0 +1,5 @@
+Compiling C:\Users\Martin Hdez\Desktop\18F4550\4 Contador binario\Contador binario on 01-dic.-20 at 09:55
+>>> Warning 203 "C:\Users\Martin Hdez\Desktop\18F4550\4 Contador binario\Contador binario.c" Line 35(1,1): Condition always TRUE
+      Memory usage:   ROM=0%      RAM=0% - 0%
+      0 Errors,  1 Warnings.
+Build Successful.

@@ -1,0 +1,149 @@
+CCS PCH C Compiler, Version 5.090, 13314               01-dic.-20 09:55
+
+               Filename:   C:\Users\Martin Hdez\Desktop\18F45K50\Práctica 4 – Contador binario\Contador binario.lst
+
+               ROM used:   128 bytes (0%)
+                           Largest free fragment is 24444
+               RAM used:   5 (0%) at main() level
+                           6 (0%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+2000:  GOTO   203C
+.................... /*
+....................   AUTOR: MICROSIDE TECHNOLOGY S.A. DE C.V.
+....................   FECHA: JUNIO 2019
+.................... */
+.................... 
+.................... /*
+.................... ------------------------------------------------------------------------------------------
+....................  Implementar un contador binario que incrementará cada vez que se presione un botón,
+....................  este será configurado como entrada digital. Para visualizar el conteo se utilizan 8 LEDs.
+.................... ------------------------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F45K50.h>                                   //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F45K50 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F45K50
+.................... 
+.................... #list
+.................... 
+.................... #use delay(internal=48MHz)                              //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+*
+2014:  CLRF   FEA
+2016:  MOVLW  05
+2018:  MOVWF  FE9
+201A:  MOVF   FEF,W
+201C:  BZ    203A
+201E:  MOVLW  0F
+2020:  MOVWF  01
+2022:  CLRF   00
+2024:  DECFSZ 00,F
+2026:  BRA    2024
+2028:  DECFSZ 01,F
+202A:  BRA    2022
+202C:  MOVLW  8F
+202E:  MOVWF  00
+2030:  DECFSZ 00,F
+2032:  BRA    2030
+2034:  NOP   
+2036:  DECFSZ FEF,F
+2038:  BRA    201E
+203A:  RETURN 0
+.................... #build(reset=0x02000,interrupt=0x02008)                 //Asigna los vectores de reset e interrupción para la versión con bootloader
+.................... #org 0x0000,0x1FFF {}                                   //Reserva espacio en memoria para el bootloader
+.................... #define Boton PIN_A2                                    //Asigna el pin A2 al boton BOOT del X-TRAINER
+.................... 
+.................... byte cont =0;
+.................... 
+.................... void SisInit (void)
+.................... 
+....................   {
+....................     set_tris_b (0b00000000);                            //Configura todo el puerto B como salida
+*
+2008:  MOVLW  00
+200A:  MOVWF  F93
+....................     set_tris_a (0b11111111);                            //Configura todo el puerto A como entrada
+200C:  MOVLW  FF
+200E:  MOVWF  F92
+2010:  GOTO   2060 (RETURN)
+....................   }
+.................... 
+....................  
+.................... 
+.................... void main(void)
+*
+203C:  CLRF   FF8
+203E:  BCF    FD0.7
+2040:  MOVLW  70
+2042:  MOVWF  FD3
+2044:  CLRF   FD2
+2046:  CLRF   F9B
+2048:  CLRF   04
+204A:  MOVLB  F
+204C:  CLRF   x5B
+204E:  CLRF   x5C
+2050:  CLRF   x5D
+2052:  CLRF   x5E
+2054:  CLRF   x5F
+2056:  CLRF   F9A
+2058:  CLRF   F99
+205A:  CLRF   F98
+.................... 
+....................   {
+....................    SisInit ();
+205C:  MOVLB  0
+205E:  BRA    2008
+.................... 
+....................    while (1)                                             //Mientras sea verdadero se ejecuta el siguiente código
+.................... 
+....................     {
+....................      if (!input (Boton))                                 //Pregunta el estado del boton
+2060:  BSF    F92.2
+2062:  BTFSC  F80.2
+2064:  BRA    2080
+.................... 
+....................       {
+....................         cont++;                                          //Se incrementa el contador
+2066:  INCF   04,F
+....................         output_b (cont);                                 //Se asigna el valor de cont al puerto B y se despliega el valor
+2068:  CLRF   F93
+206A:  MOVFF  04,F8A
+....................         Delay_ms (5);                                    //Retardo
+206E:  MOVLW  05
+2070:  MOVWF  05
+2072:  RCALL  2014
+....................         while (!input (Boton));                          //Mientras el botón se mantenga igual a cero
+2074:  BSF    F92.2
+2076:  BTFSS  F80.2
+2078:  BRA    2074
+....................         Delay_ms (5);                                    //Retardo
+207A:  MOVLW  05
+207C:  MOVWF  05
+207E:  RCALL  2014
+....................      }
+2080:  BRA    2060
+.................... 
+....................    }
+.................... 
+.................... }
+2082:  SLEEP 
+
+Configuration Fuses:
+   Word  1: C823   PLL3X PLLEN NOCPUDIV LS48MHZ INTRC_IO PRIMARY_SW FCMEN IESO
+   Word  2: 3C5E   PUT BROWNOUT BORV19 NOLPBOR NOWDT WDT32768
+   Word  3: D300   CCP2C1 PBADEN T3CKC0 SDOB3 MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB
