@@ -1,7 +1,10 @@
-/*
-  AUTOR: MICROSIDE TECHNOLOGY S.A. DE C.V.
-  FECHA: JUNIO 2019
-*/
+/************************************************************************************************
+Company:
+Microside Technology Inc.
+Product Revision  :  1
+Device            :  X-TRAINER
+Driver Version    :  1.0
+************************************************************************************************/
 
 /*
 ------------------------------------------------------------------------------------------
@@ -17,21 +20,12 @@
 #define Boton PIN_A2                            //Asigna el pin A2 al boton BOOT del X-TRAINER
 
 byte cont =0;
-
-void SisInit (void)
-
-  {
-    set_tris_b (0b00000000);                                      //Configura todo el puerto B como salida
-    set_tris_a (0b11111111);                                      //Configura todo el puerto A como entrada
-  }
-
  
 void main(void)
-
-  {
-
-   SisInit ();
-
+{
+   set_tris_b (0b00000000);                                      //Configura todo el puerto B como salida
+   set_tris_a (0b11111111);                                      //Configura todo el puerto A como entrada
+   
    while (1)                                                     //Mientras sea verdadero se ejecuta el siguiente código
 
     {
