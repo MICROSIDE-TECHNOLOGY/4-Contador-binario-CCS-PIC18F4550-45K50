@@ -1,9 +1,9 @@
 
-ROM used:   112/32768 (0%)
-            116/32768 (0%) including unused fragments
+ROM used:   106/32768 (0%)
+            110/32768 (0%) including unused fragments
 
             0.1 Average locations per line
-            8.6 Average locations per statement
+            8.8 Average locations per statement
 
 RAM used:   5/2048 (0%) at main() level
             6/2048 (0%) worst case
@@ -13,35 +13,34 @@ Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   52    13 100  Contador binario.c
-  861     0   0  D:\Programas\PICC\Devices\18F4550.h
+   40    12 100  Contador binario.c
+  877     0   0  ..\..\..\..\..\..\..\..\..\..\Program Files (x86)\PICCDEMO\Devices\18F4550.h
 ----- -----
-  913    13 Total
+  917    12 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
-0     40  18    1             @delay_ms1
-0     12   5    0     37  1.1  SisInit
-0     56  25    0    176  3.1  MAIN
- Inline         0    362  2.3  @cinit1
+0     40  19    1             @delay_ms1
+0     62  29    0    207  3.1  main
+ Inline         0             @cinit1
 
 Program metrics:
-    Functions               3
-    Statements              13
-    Comments                185
-    Volume (V)              731
-    Difficulty (D)          6.4
-    Effort to implement (E) 4713
-    Time to implement (T)   4 minutes
+    Functions               1
+    Statements              12
+    Comments                191
+    Volume (V)              212
+    Difficulty (D)          2.8
+    Effort to implement (E) 599
+    Time to implement (T)   1 minutes
     Est Delivered Bugs (B)  0
     Cyclomatic Complexity   1
-    Maintainability (MI)    99
+    Maintainability (MI)    130
 
  Segment     Used  Free
 -----------  ----  ----
 00000-01FFE     0  8192  
 02000-02006     4  4  
-02008-07FFE   108  24460  
+02008-07FFE   102  24466  
 
 
 

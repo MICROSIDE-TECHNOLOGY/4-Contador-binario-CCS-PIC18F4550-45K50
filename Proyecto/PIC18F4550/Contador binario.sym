@@ -8,41 +8,40 @@
 F83     PSP_DATA
 FB4.6   C1OUT
 FB4.7   C2OUT
-FBB     CCP_2
 FBB     CCP_2_LOW
+FBB     CCP_2
 FBC     CCP_2_HIGH
-FBE     CCP_1
 FBE     CCP_1_LOW
+FBE     CCP_1
 FBF     CCP_1_HIGH
-FE1-FE2 @WRITE_PACKED_MEMORY.P1
-FE1-FE2 @READ_PACKED_MEMORY.P2
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
 FE9-FEA @WRITE_PROGRAM_MEMORY.P1
-FE9-FEA @READ_PROGRAM_MEMORY.P2
-FE9-FEA @READ_PACKED_MEMORY.P3
-FE9-FEA @WRITE_PACKED_MEMORY.P4
-FF6-FF8 @READ_PROGRAM_MEMORY.P1
-FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
 
 ROM Allocation:
-002008  SisInit
-002014  @delay_ms1
-00203C  MAIN
-00203C  @cinit1
-00204E  @cinit2
+002008  @delay_ms1
+002030  @cinit1
+002030  main
+002042  @cinit2
 
 Project Directory:
-    C:\Users\Martin Hdez\Desktop\18F4550\4 Contador binario\
+    C:\Users\victo\OneDrive\Documentos\X-TRAINER-hands-on\CCS\PIC18F\4-Contador-binario-CCS-PIC18F4550-45K50\Proyecto\PIC18F4550\
 
 Project Files:
-    Contador binario.c                                      [30-nov.-20 13:40  CRC=9B0C7A8E]
-    D:\Programas\PICC\Devices\18F4550.h                     [02-oct.-19 09:47  CRC=AFEA7A8E]
+    Contador binario.c                                      [30-ago.-23 13:37  CRC=64215C14]
+    ..\..\..\..\..\..\..\..\..\..\Program Files (x86)\PICCDEMO\Devices\18F4550.h [02-may.-23 08:34  CRC=3BACED27]
 
-Source signature=FAE16FAA
+Source signature=DB7B3662
 Program memory checksum=0000
-Hex file CRC=41BB
+Hex file CRC=D608
 
 Units:
-    C:\Users\Martin Hdez\Desktop\18F4550\4 Contador binario\Contador binario (main)
+    C:\Users\victo\OneDrive\Documentos\X-TRAINER-hands-on\CCS\PIC18F\4-Contador-binario-CCS-PIC18F4550-45K50\Proyecto\PIC18F4550\Contador binario (main)
 
 Compiler Settings:
     Processor:      PIC18F4550
@@ -51,7 +50,10 @@ Compiler Settings:
     Opt Level:      9
     Short,Int,Long: UNSIGNED: 1,8,16
     Float,Double:   32,32
-    Compile Mode:       CCS5
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
 
 Output Files:
     XREF file:   Contador binario.xsym

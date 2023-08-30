@@ -1,20 +1,25 @@
-CCS PCH C Compiler, Version 5.090, 13314               01-dic.-20 09:55
+CCS PCH C Compiler, Version 5.115d, 1               30-ago.-23 13:38
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
 
-               Filename:   C:\Users\Martin Hdez\Desktop\18F4550\4 Contador binario\Contador binario.lst
+               Filename:   C:\Users\victo\OneDrive\Documentos\X-TRAINER-hands-on\CCS\PIC18F\4-Contador-binario-CCS-PIC18F4550-45K50\Proyecto\PIC18F4550\Contador binario.lst
 
-               ROM used:   112 bytes (0%)
-                           Largest free fragment is 24460
+               ROM used:   106 bytes (0%)
+                           Largest free fragment is 24466
                RAM used:   5 (0%) at main() level
                            6 (0%) worst case
                Stack used: 0 locations
                Stack size: 31
 
 *
-2000:  GOTO   203C
-.................... /*
-....................   AUTOR: MICROSIDE TECHNOLOGY S.A. DE C.V.
-....................   FECHA: JUNIO 2019
-.................... */
+2000:  GOTO   2030
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
 .................... 
 .................... /*
 .................... ------------------------------------------------------------------------------------------
@@ -23,10 +28,10 @@ CCS PCH C Compiler, Version 5.090, 13314               01-dic.-20 09:55
 .................... ------------------------------------------------------------------------------------------
 .................... */
 .................... 
-.................... #include <18F4550.h>                            //Incluye el microcontrolador con el que se va a trabajar 
+.................... #include <18F4550.h>                           // Incluye el microcontrolador con el que se va a trabajar 
 .................... //////////// Standard Header file for the PIC18F4550 device ////////////////
 .................... ///////////////////////////////////////////////////////////////////////////
-.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          ////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
 .................... //// This source code may only be used by licensed users of the CCS C  ////
 .................... //// compiler.  This source code may only be distributed to other      ////
 .................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
@@ -38,103 +43,84 @@ CCS PCH C Compiler, Version 5.090, 13314               01-dic.-20 09:55
 .................... 
 .................... #list
 .................... 
-.................... #use delay(clock=48Mhz, crystal)                //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+.................... #use delay( clock=48Mhz, crystal )             // Tipo de oscilador y frecuencia dependiendo del microcontrolador 
 *
-2014:  CLRF   FEA
-2016:  MOVLW  05
-2018:  MOVWF  FE9
-201A:  MOVF   FEF,W
-201C:  BZ    203A
-201E:  MOVLW  0F
-2020:  MOVWF  01
-2022:  CLRF   00
+2008:  CLRF   FEA
+200A:  MOVLW  05
+200C:  MOVWF  FE9
+200E:  MOVF   FEF,W
+2010:  BZ    202E
+2012:  MOVLW  0F
+2014:  MOVWF  01
+2016:  CLRF   00
+2018:  DECFSZ 00,F
+201A:  BRA    2018
+201C:  DECFSZ 01,F
+201E:  BRA    2016
+2020:  MOVLW  8F
+2022:  MOVWF  00
 2024:  DECFSZ 00,F
 2026:  BRA    2024
-2028:  DECFSZ 01,F
-202A:  BRA    2022
-202C:  MOVLW  8F
-202E:  MOVWF  00
-2030:  DECFSZ 00,F
-2032:  BRA    2030
-2034:  NOP   
-2036:  DECFSZ FEF,F
-2038:  BRA    201E
-203A:  RETURN 0
-.................... #build(reset=0x02000,interrupt=0x02008)         //Asignación de los vectores de reset e interrupción
-.................... #org 0x0000,0x1FFF {}                           //Reserva espacio en la memoria para la versión con bootloader
-.................... #define Boton PIN_A2                            //Asigna el pin A2 al boton BOOT del X-TRAINER
+2028:  NOP   
+202A:  DECFSZ FEF,F
+202C:  BRA    2012
+202E:  RETURN 0
+.................... #build( reset=0x02000, interrupt=0x02008 )     // Asignación de los vectores de reset e interrupción
+.................... #org 0x0000,0x1FFF {}                          // Reserva espacio en la memoria para la versión con bootloader
+.................... #define Boton PIN_A2                           // Asigna el pin A2 al boton BOOT del X-TRAINER
 .................... 
-.................... byte cont =0;
-.................... 
-.................... void SisInit (void)
-.................... 
-....................   {
-....................     set_tris_b (0b00000000);                                      //Configura todo el puerto B como salida
-*
-2008:  MOVLW  00
-200A:  MOVWF  F93
-....................     set_tris_a (0b11111111);                                      //Configura todo el puerto A como entrada
-200C:  MOVLW  FF
-200E:  MOVWF  F92
-2010:  GOTO   2050 (RETURN)
-....................   }
-.................... 
+.................... byte cont = 0;
 ....................  
-.................... void main(void)
-*
-203C:  CLRF   FF8
-203E:  BCF    FD0.7
-2040:  CLRF   04
-2042:  MOVF   FC1,W
-2044:  ANDLW  C0
-2046:  IORLW  0F
-2048:  MOVWF  FC1
-204A:  MOVLW  07
-204C:  MOVWF  FB4
+.................... void main( void ) {
+2030:  CLRF   FF8
+2032:  BCF    FD0.7
+2034:  CLRF   04
+2036:  MOVF   FC1,W
+2038:  ANDLW  C0
+203A:  IORLW  0F
+203C:  MOVWF  FC1
+203E:  MOVLW  07
+2040:  MOVWF  FB4
+....................    set_tris_b( 0x00 );                         // Configura todo el puerto B como salida
+2042:  MOVLW  00
+2044:  MOVWF  F93
+....................    set_tris_a( 0xFF );                         // Configura todo el puerto A como entrada
+2046:  MOVLW  FF
+2048:  MOVWF  F92
 .................... 
-....................   {
+....................    while ( 1 ) {                               // Mientras sea verdadero se ejecuta el siguiente código
+....................    
+....................       if ( !input( Boton ) ) {                 // Pregunta el estado del boton
+204A:  BSF    F92.2
+204C:  BTFSC  F80.2
+204E:  BRA    206A
+....................          cont++;                               // Se incrementa el contador
+2050:  INCF   04,F
+....................          output_b( cont );                     // Se asigna el valor del cont al puerto B y se despliega el valor
+2052:  CLRF   F93
+2054:  MOVFF  04,F8A
+....................          Delay_ms( 5 );                        // Retardo
+2058:  MOVLW  05
+205A:  MOVWF  05
+205C:  RCALL  2008
 .................... 
-....................    SisInit ();
-204E:  BRA    2008
-.................... 
-....................    while (1)                                                     //Mientras sea verdadero se ejecuta el siguiente código
-.................... 
-....................     {
-....................      if (!input (Boton))                                         //Pregunta el estado del boton
-2050:  BSF    F92.2
-2052:  BTFSC  F80.2
-2054:  BRA    2070
-.................... 
-....................       {
-....................         cont++;                                                  //Se incrementa el contador
-2056:  INCF   04,F
-....................         output_b (cont);                                         //Se asigna el valor del cont al puerto B y se despliega el valor
-2058:  CLRF   F93
-205A:  MOVFF  04,F8A
-....................         Delay_ms (5);                                            //Retardo
-205E:  MOVLW  05
-2060:  MOVWF  05
-2062:  RCALL  2014
-....................         while (!input (Boton));                                  //Mientras el botón se mantenga igual a cero
-2064:  BSF    F92.2
-2066:  BTFSS  F80.2
-2068:  BRA    2064
-....................         Delay_ms (5);                                            //Retardo
-206A:  MOVLW  05
-206C:  MOVWF  05
-206E:  RCALL  2014
-.................... 
-....................      }
-2070:  BRA    2050
-.................... 
+....................          while ( !input( Boton ) );            // Mientras el botón se mantenga igual a cero
+205E:  BSF    F92.2
+2060:  BTFSS  F80.2
+2062:  BRA    205E
+....................          Delay_ms( 5 );                        // Retardo
+2064:  MOVLW  05
+2066:  MOVWF  05
+2068:  RCALL  2008
+....................       }
+206A:  BRA    204A
 ....................    }
-.................... 
 .................... }
-2072:  SLEEP 
+206C:  SLEEP 
 
 Configuration Fuses:
    Word  1: CC07   PLL12 CPUDIV1 NOUSBDIV HS FCMEN IESO
-   Word  2: 1E26   PUT BROWNOUT VREGEN NOWDT WDT32768
+   Word  2: 1E3E   PUT BROWNOUT BORV21 VREGEN NOWDT WDT32768
    Word  3: 8700   CCP2C1 PBADEN LPT1OSC MCLR
    Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
    Word  5: C00F   NOPROTECT NOCPB NOCPD
